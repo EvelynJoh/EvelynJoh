@@ -1,0 +1,25 @@
+version: '3'
+services:
+  frontend:
+    build: ./my-frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - my-network
+  backend:
+    build: ./my-backend
+    ports:
+      - "3001:3001"
+    networks:
+      - my-network
+    depends_on:
+      - database
+  database:
+    build: ./my-database
+    ports:
+      - "27017:27017"
+    networks:
+      - my-network
+networks:
+  my-network:
+    driver: bridge
